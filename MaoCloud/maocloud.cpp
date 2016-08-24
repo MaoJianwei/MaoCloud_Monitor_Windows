@@ -77,13 +77,13 @@ void MaoCloud::updateNodeTableView(NodeBroadcastInfo* nodeInfo)
 	int row = getNodeInfoRow(nodeInfo);
 	if (row == ui.NodeBrocastTable->rowCount()){
 		ui.NodeBrocastTable->setRowCount(row + 1);
-	}	
+	}
 
 	QTableWidgetItem* temp[Mao_Cloud_Node_Broadcast_Table_Column];
 	for (int i = 0; i < Mao_Cloud_Node_Broadcast_Table_Column; i++){
 		temp[i] = new QTableWidgetItem();
 		temp[i]->setFlags((temp[i]->flags()) & (~Qt::ItemIsEditable));
-		temp[i]->setTextAlignment(Qt::AlignLeft);
+		temp[i]->setTextAlignment(Qt::AlignVCenter);
 
 		switch (i){
 		case 0:
@@ -121,7 +121,7 @@ int MaoCloud::getNodeInfoRow(NodeBroadcastInfo* nodeInfo){
 	}
 	
 	if (-1 == row){
-		emit 
+
 		return ui.NodeBrocastTable->rowCount();//ui.NodeBrocastTable->rowCount() represent the number of a new row.
 	}
 	else{
@@ -149,7 +149,7 @@ void MaoCloud::initNodeBroadcastTableViewUI()
 	ui.NodeBrocastTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	ui.NodeBrocastTable->setShowGrid(true);
 	ui.NodeBrocastTable->setSortingEnabled(true);
-	ui.NodeBrocastTable->sortByColumn(0, Qt::AscendingOrder);
+	//ui.NodeBrocastTable->sortByColumn(0, Qt::AscendingOrder);
 	ui.NodeBrocastTable->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui.NodeBrocastTable->setSelectionMode(QAbstractItemView::SingleSelection);
 	ui.NodeBrocastTable->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
