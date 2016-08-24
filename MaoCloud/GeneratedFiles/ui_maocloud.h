@@ -30,7 +30,7 @@ public:
     QVBoxLayout *verticalLayout;
     QGridLayout *gridLayout;
     QTableWidget *NodeBrocastTable;
-    QPushButton *pushButton;
+    QPushButton *StartUDP;
 
     void setupUi(QMainWindow *MaoCloudClass)
     {
@@ -56,20 +56,20 @@ public:
 
         gridLayout->addWidget(NodeBrocastTable, 0, 0, 1, 1);
 
-        pushButton = new QPushButton(centralWidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
+        StartUDP = new QPushButton(centralWidget);
+        StartUDP->setObjectName(QStringLiteral("StartUDP"));
         QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
-        pushButton->setSizePolicy(sizePolicy1);
+        sizePolicy1.setHeightForWidth(StartUDP->sizePolicy().hasHeightForWidth());
+        StartUDP->setSizePolicy(sizePolicy1);
         QFont font;
         font.setPointSize(18);
         font.setBold(true);
         font.setWeight(75);
-        pushButton->setFont(font);
+        StartUDP->setFont(font);
 
-        gridLayout->addWidget(pushButton, 1, 0, 1, 1);
+        gridLayout->addWidget(StartUDP, 1, 0, 1, 1);
 
 
         verticalLayout->addLayout(gridLayout);
@@ -84,7 +84,7 @@ public:
     void retranslateUi(QMainWindow *MaoCloudClass)
     {
         MaoCloudClass->setWindowTitle(QApplication::translate("MaoCloudClass", "MaoCloud", 0));
-        pushButton->setText(QApplication::translate("MaoCloudClass", "StartUDP", 0));
+        StartUDP->setText(QApplication::translate("MaoCloudClass", "StartUDP", 0));
     } // retranslateUi
 
 };

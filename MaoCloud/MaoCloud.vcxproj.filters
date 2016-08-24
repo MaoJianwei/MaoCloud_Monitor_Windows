@@ -50,9 +50,6 @@
     <ClCompile Include="GeneratedFiles\qrc_maocloud.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="NodeBroadcastInfo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="maocloud.h">

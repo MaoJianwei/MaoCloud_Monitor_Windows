@@ -157,7 +157,6 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="maocloud.cpp" />
-    <ClCompile Include="NodeBroadcastInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="maocloud.h">

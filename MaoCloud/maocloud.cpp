@@ -1,6 +1,7 @@
 #include "maocloud.h"
 
 
+#include <QMessageBox>
 
 #include "MaoConst.h"
 
@@ -14,7 +15,8 @@ MaoCloud::MaoCloud(QWidget *parent)
 	initNodeBroadcastTableView();
 	initNodeBroadcastTableViewUI();
 
-	connect(this, SIGNAL(signalUpdateNodeTableView(NodeBroadcastInfo*)), SLOT(updateNodeTableView(NodeBroadcastInfo*)));
+	connect(ui.StartUDP, &QPushButton::clicked, this, &MaoCloud::OpenUdp);
+	connect(this, &MaoCloud::signalUpdateNodeTableView, &MaoCloud::updateNodeTableView);
 }
 
 MaoCloud::~MaoCloud()
@@ -26,6 +28,7 @@ void MaoCloud::OpenUdp()
 {
 	nodeBroadcast.bind(7181, QAbstractSocket::ShareAddress);
 	connect(&nodeBroadcast, SIGNAL(readyRead()), this, SLOT(RecvUdp()));
+	QMessageBox::about(this,"UDP","Network - OK");
 }
 void MaoCloud::RecvUdp()
 {
@@ -74,17 +77,14 @@ void MaoCloud::updateNodeTableView(NodeBroadcastInfo* nodeInfo)
 	int row = getNodeInfoRow(nodeInfo);
 	if (row == ui.NodeBrocastTable->rowCount()){
 		ui.NodeBrocastTable->setRowCount(row + 1);
-	}
-	
+	}	
 
 	QTableWidgetItem* temp[Mao_Cloud_Node_Broadcast_Table_Column];
-	for each (QTableWidgetItem* t in temp){
-		t = new QTableWidgetItem();
-		t->setFlags((t->flags()) & (~Qt::ItemIsEditable));//只允许修正“机型”、“起飞机场”、“备降机场”
-		t->setTextAlignment(Qt::AlignLeft);
-	}
-
 	for (int i = 0; i < Mao_Cloud_Node_Broadcast_Table_Column; i++){
+		temp[i] = new QTableWidgetItem();
+		temp[i]->setFlags((temp[i]->flags()) & (~Qt::ItemIsEditable));
+		temp[i]->setTextAlignment(Qt::AlignLeft);
+
 		switch (i){
 		case 0:
 			temp[i]->setText(nodeInfo->name);
@@ -105,13 +105,28 @@ void MaoCloud::updateNodeTableView(NodeBroadcastInfo* nodeInfo)
 			temp[i]->setText(nodeInfo->nodeTime);
 			break;
 		}
-
 		ui.NodeBrocastTable->setItem(row, i, temp[i]);
 	}
+	delete nodeInfo;
 }
-/* for Updating nodeInfo */
+/* for Updating nodeInfo and discovering new node */
 int MaoCloud::getNodeInfoRow(NodeBroadcastInfo* nodeInfo){
-	//ui.NodeBrocastTable->rowCount()
+	
+	int row = -1;	
+	for (int i = 0; i < ui.NodeBrocastTable->rowCount(); i++){
+		if (ui.NodeBrocastTable->item(i, 0)->text() == nodeInfo->name){
+			row = i;
+			break;
+		}
+	}
+	
+	if (-1 == row){
+		emit 
+		return ui.NodeBrocastTable->rowCount();//ui.NodeBrocastTable->rowCount() represent the number of a new row.
+	}
+	else{
+		return row;
+	}
 }
 
 

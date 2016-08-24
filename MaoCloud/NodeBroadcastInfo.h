@@ -5,9 +5,11 @@
 class NodeBroadcastInfo
 {
 public:
-	NodeBroadcastInfo();
-	~NodeBroadcastInfo();
-	bool Equal(NodeBroadcastInfo & other);
+	NodeBroadcastInfo(){};
+	~NodeBroadcastInfo(){};
+	bool Equal(NodeBroadcastInfo & other){
+		return name == other.name;
+	}
 
 public:
 	QString name;
